@@ -78,5 +78,25 @@ RSpec.describe GramsController, type: :controller do
     end
   end
 
+  describe "grams@update action" do
+
+    it "should allow users to update a gram" do
+    end
+
+
+    it "should return 404 error if gram is not found" do
+
+    end
+
+    it "should render edit form with unprocessable_entity if not valid" do
+
+    end
+
+    it "should redirect_to show page if gram is updated" do
+    end
+
+  end
+
+
 
 end
