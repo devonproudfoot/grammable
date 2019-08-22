@@ -81,20 +81,26 @@ RSpec.describe GramsController, type: :controller do
   describe "grams@update action" do
 
     it "should allow users to update a gram" do
+      gram = FactoryBot.create(:gram, message: 'Initial Message')
+      patch :update, params: { id: gram.id, gram: { message: 'Changed' } }
+      expect(response).to redirect_to gram_path(gram)
+      gram.reload
+      expect(gram.message).to eq 'Changed'
     end
 
 
     it "should return 404 error if gram is not found" do
-
+      patch :update, params: { id: 'FAKEID', gram: { message: 'FAKEMESSAGE' } }
+      expect(response).to have_http_status(:not_found)
     end
 
     it "should render edit form with unprocessable_entity if not valid" do
-
+      gram = FactoryBot.create(:gram, message: 'Initial Message')
+      patch :update, params: { id: gram.id, gram: { message: '' } }
+      expect(response).to have_http_status(:unprocessable_entity)
+      gram.reload
+      expect(gram.message).to eq 'Initial Message'
     end
-
-    it "should redirect_to show page if gram is updated" do
-    end
-
   end
 
 

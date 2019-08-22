@@ -19,15 +19,23 @@ class GramsController < ApplicationController
   end
 
   def show
-    @gram = Gram.find_by_id(params[:id])
-    render_not_found if @gram.blank?
+    render_not_found if current_gram.blank?
   end
 
   def edit
-    @gram = Gram.find_by_id(params[:id])
-    render_not_found if @gram.blank?
+    render_not_found if current_gram.blank?
   end
 
+  def update
+    return render_not_found if current_gram.blank?
+    
+    current_gram.update_attributes(gram_params)
+    if current_gram.valid?
+      redirect_to gram_path(current_gram)
+    else
+      return render :edit, status: :unprocessable_entity
+    end
+  end
 
   private
 
@@ -37,6 +45,11 @@ class GramsController < ApplicationController
 
   def render_not_found
     render plain: "Not found!", status: :not_found
+  end
+
+  helper_method :current_gram
+  def current_gram
+    @gram ||= Gram.find_by_id(params[:id])
   end
 
 end
