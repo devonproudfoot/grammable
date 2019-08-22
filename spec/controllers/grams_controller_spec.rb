@@ -78,8 +78,7 @@ RSpec.describe GramsController, type: :controller do
     end
   end
 
-  describe "grams@update action" do
-
+  describe "grams#update action" do
     it "should allow users to update a gram" do
       gram = FactoryBot.create(:gram, message: 'Initial Message')
       patch :update, params: { id: gram.id, gram: { message: 'Changed' } }
@@ -87,7 +86,6 @@ RSpec.describe GramsController, type: :controller do
       gram.reload
       expect(gram.message).to eq 'Changed'
     end
-
 
     it "should return 404 error if gram is not found" do
       patch :update, params: { id: 'FAKEID', gram: { message: 'FAKEMESSAGE' } }
@@ -101,6 +99,22 @@ RSpec.describe GramsController, type: :controller do
       gram.reload
       expect(gram.message).to eq 'Initial Message'
     end
+  end
+
+  describe "grams#destroy action" do
+    it "should allow a user to delete a gram" do
+      gram = FactoryBot.create(:gram)
+      delete :destroy, params: { id: gram.id }
+      expect(response).to redirect_to root_path
+      gram = Gram.find_by_id(gram.id)
+      expect(gram).to eq nil
+    end
+
+    it "should return a 404 if a gram is not found" do
+      delete :destroy, params: { id: 'FAKEID' }
+      expect(response).to have_http_status(:not_found)
+    end
+
   end
 
 

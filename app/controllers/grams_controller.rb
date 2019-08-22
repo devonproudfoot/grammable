@@ -37,6 +37,12 @@ class GramsController < ApplicationController
     end
   end
 
+  def destroy
+    return render_not_found if current_gram.blank?
+    current_gram.destroy
+    redirect_to root_path
+  end
+
   private
 
   def gram_params
