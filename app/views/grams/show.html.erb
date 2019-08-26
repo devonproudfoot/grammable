@@ -1,1 +1,5 @@
 <h1><%= @gram.id %></h1>
+<div>
+  <%= image_tag @gram.picture.url, class: 'img-fluid' %>
+  <%= @gram.message %>
+</div>

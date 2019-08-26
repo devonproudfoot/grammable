@@ -1,1 +1,4 @@
 <h1 class="text-center">Grams Index!</h1>
+<% @grams.each do |gram| %>
+  <div><%= link_to gram.message, gram_path(gram) %></div>
+<% end %>
