@@ -52,10 +52,6 @@ class GramsController < ApplicationController
     params.require(:gram).permit(:message, :picture)
   end
 
-  def render_not_found
-    render plain: "Not found!", status: :not_found
-  end
-
   helper_method :current_gram
   def current_gram
     @gram ||= Gram.find_by_id(params[:id])
