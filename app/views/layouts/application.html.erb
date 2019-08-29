@@ -20,6 +20,7 @@
         </div>
         <div class="add float-right">
           <% if current_user %>
+            <span id="large-screens-only">You're signed in as <%= current_user.email %>.</span>
             <%= link_to "New Post", new_gram_path %>
             <%= link_to "Sign out", destroy_user_session_path, method: :delete %>
           <% else %>

@@ -84,7 +84,7 @@ input {
   line-height: 44px;
 }
 
-.gram-actions a {
+.gram-actions {
   font-weight: bold;
   font-size: 16px;
   margin-right: 20px;
@@ -104,4 +104,10 @@ input {
   color: #125688;
   font-weight: bold;
   font-size: 18px;
+}
+
+@media only screen and (max-width: 1400px) {
+    #large-screens-only {
+        display: none;
+    }
 }
