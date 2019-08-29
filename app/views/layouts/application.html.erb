@@ -15,9 +15,11 @@
   <body>
     <div class="top-nav">
       <div class="col-10 offset-1 col-sm-8 offset-sm-2 col-md-6 offset-md-3">
-        <div class="brand float-left">
-          Grammable
-        </div>
+        <%= link_to root_path do %>
+          <div class="brand float-left">
+            Grammable
+          </div>
+        <% end %>
         <div class="add float-right">
           <% if current_user %>
             <span id="large-screens-only">You're signed in as <%= current_user.email %>.</span>
